@@ -36,18 +36,27 @@ namespace Project1
             }
             return array;
         }
+        static void PrintArray(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write($"{array[i]} ");
+            }
+            Console.WriteLine();
+        }
         static void Main(string[] args)
         {
             int[] array = new int [80];
+            Random rnd = new Random();
             for (int i = 0; i < array.Length; i++)
             {
-                array[i] = 100 - i;
+                array[i] = rnd.Next(1, 100);
             }
+            Console.WriteLine("На вход подается массив:");
+            PrintArray(array);
             array = BucketSort(array);
-            for (int i = 0; i < array.Length; i++)
-            {
-                Console.WriteLine(array[i]);
-            }
+            Console.WriteLine("После сортировки получаем:");
+            PrintArray(array);
         }
     }
 }
