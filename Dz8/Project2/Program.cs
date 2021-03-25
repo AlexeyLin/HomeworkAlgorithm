@@ -47,9 +47,27 @@ namespace Project2
             string initialDataPath = @"C:\testfile\initialData.txt";
             using (StreamWriter initialData = File.CreateText(initialDataPath))
             {
-                for(int i = 0;i<100000; i++)
+                for(int i = 0;i<100; i++)
                 {
                     initialData.WriteLine(rnd.Next(1, 1000));
+                }
+            }
+
+            int cnt = 1;
+            using (StreamReader readData = new StreamReader(initialDataPath))
+            {
+                string number = readData.ReadLine();
+                while (number != null)
+                {
+                    using (StreamWriter initialData = File.CreateText($"C:\\testfile\\{cnt}.txt"))
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            initialData.WriteLine(number);
+                            number = readData.ReadLine();                             
+                        }
+                        cnt++;
+                    }
                 }
             }
 
