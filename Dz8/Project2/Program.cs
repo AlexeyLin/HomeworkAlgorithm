@@ -47,29 +47,48 @@ namespace Project2
             string initialDataPath = @"C:\testfile\initialData.txt";
             using (StreamWriter initialData = File.CreateText(initialDataPath))
             {
-                for(int i = 0;i<100; i++)
+                for(int i = 0;i<105; i++)
                 {
                     initialData.WriteLine(rnd.Next(1, 1000));
                 }
             }
 
+
+
             int cnt = 1;
             using (StreamReader readData = new StreamReader(initialDataPath))
             {
-                string number = readData.ReadLine();
-                while (number != null)
+                int number = Convert.ToInt32(readData.ReadLine());
+                while (number != 0)
                 {
+                    List<int> array = new List<int>();
+                    for (int i = 0; i < 10; i++)
+                    {
+                        array.Add(number);
+                        number = Convert.ToInt32(readData.ReadLine());
+                        if (number == 0)
+                        {
+                            break;
+                        }
+                    }
+                    array.Sort();
                     using (StreamWriter initialData = File.CreateText($"C:\\testfile\\{cnt}.txt"))
                     {
-                        for (int i = 0; i < 10; i++)
+                        for (int i = 0; i < array.Count; i++)
                         {
-                            initialData.WriteLine(number);
-                            number = readData.ReadLine();                             
+                            initialData.WriteLine(Convert.ToString(array[i]));                          
                         }
-                        cnt++;
-                    }
+                    } 
+                    cnt++;
                 }
             }
+
+            Console.WriteLine();
+
+
+
+
+
 
         }
     }
